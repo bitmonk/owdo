@@ -14,7 +14,7 @@ setup(name='owdo',
       author_email='bitmonk@icloud.com',
       url='',
       license='AGPL2',
-      namespace_packages=['src'],
+      package_dir = {'': 'src'},
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=True,
@@ -22,7 +22,7 @@ setup(name='owdo',
         'cement',
         'boto',
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      entry_points={
+        'console_scripts': ['owdo=owdo.command_line:main'],
+      },
       )

@@ -73,8 +73,7 @@ class OwdoApp(foundation.CementApp):
     label = 'owdo'
     base_controller = OwdoBaseController
 
-if __name__ == '__main__':
-
+def main():
   app = OwdoApp()
 
   try:
@@ -82,3 +81,7 @@ if __name__ == '__main__':
     app.run()
   finally:
     app.close()
+
+if __name__ == '__main__':
+  main()
+
