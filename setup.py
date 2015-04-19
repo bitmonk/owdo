@@ -18,7 +18,8 @@ setup(name='owdo',
       include_package_data=True,
       zip_safe=True,
       install_requires=[
-          # -*- Extra requirements: -*-
+        'cement',
+        'boto',
       ],
       entry_points="""
       # -*- Entry points: -*-
