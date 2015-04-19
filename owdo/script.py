@@ -2,6 +2,8 @@
 Cement script using http://builtoncement.com/2.4/dev/quickstart.html
 """
 from cement.core import backend, foundation, controller, handler
+from owdo.connection import ow
+from owdo.types import OWStack, OWLayer
 import owdo.core
 
 class OwdoBaseController(controller.CementBaseController):
@@ -40,10 +42,14 @@ class OwdoBaseController(controller.CementBaseController):
     else:
       stack_name = 'opstest'
 
+    stack = OWStack(ow, stack_name)
+
     if self.app.pargs.layer:
       layer_name = self.app.pargs.layer
     else:
       layer_name = 'test'
+
+    layer = OWLayer(ow, stack._stack, layer_name)
 
     if self.app.pargs.type:
       instance_type = self.app.pargs.type
@@ -55,7 +61,7 @@ class OwdoBaseController(controller.CementBaseController):
     else:
       name = None
 
-    owdo.core.launch(layer_name, name, 't2.medium')
+    print owdo.core.launch(layer, name, 't2.medium')
 
 
   @controller.expose(help='launch a fresh instance in a layer of a stack.')
