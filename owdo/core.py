@@ -53,16 +53,18 @@ def deploy_and_wait(stack_id, instance_ids, command_name):
   return depl_id
 
 
-def force_setup(instance, update=True):
+def force_setup(instances, update=True):
+  stack_id = instances[0]['StackId']
+  instance_ids = [ instance['InstanceId'] for instance in instances ]
   if update:
     update_depl = deploy_and_wait(
-      stack_id = instance['StackId'],
-      instance_ids = [instance['InstanceId'], ],
+      stack_id = stack_id,
+      instance_ids = instance_ids,
       command_name = 'update_custom_cookbooks'
     )
   setup_depl = deploy_and_wait(
-    stack_id = instance['StackId'],
-    instance_ids = [instance['InstanceId'], ],
+    stack_id = stack_id,
+    instance_ids = instance_ids,
     command_name = 'setup'
   )
 
@@ -77,12 +79,14 @@ def launch(layer, name, type='t2.medium'):
   ow.start_instance(id)
   return id
 
-ot = stacks['Ops Test']
+ot = stacks['opstest']
 hop = ot['layers']['http outbound proxy']
-nas = ot['layers']['Node.js App Server']
-m = ot['layers']['Monitoring']
+nas = ot['layers']['nodejs app']
+m = ot['layers']['monitoring']
 h = ot['layers']['honeypot']
-rw = ot['layers']['raw web']
+#rw = ot['layers']['raw web']
 
 o = h['instances']['okamuro']
-a = nas['instances']['opstest-nodejs-app01']
+#a1 = nas['instances']['opstest-nodejs-app01']
+#a2 = nas['instances']['opstest-nodejs-app02']
+#a3 = nas['instances']['opstest-nodejs-app03']
