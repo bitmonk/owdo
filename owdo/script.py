@@ -17,7 +17,8 @@ class OwdoBaseController(controller.CementBaseController):
     arguments = [
       (['-s', '--stack'], dict(action='store', help='stack name')),
       (['-l', '--layer'], dict(action='store', help='layer name')),
-      (['-t', '--type'], dict(action='store', help='instance type')),
+      (['-t', '--type'],  dict(action='store', help='instance type')),
+      (['-n', '--name'],  dict(action='store', help='name')),
     ]
 
   @controller.expose(hide=True, aliases=['run'])
@@ -49,7 +50,12 @@ class OwdoBaseController(controller.CementBaseController):
     else:
       instance_type = 't2.medium'
 
-    owdo.core.launch(stack_name, layer_name, 't2.medium')
+    if self.app.pargs.name:
+      name = self.app.pargs.name
+    else:
+      name = None
+
+    owdo.core.launch(layer_name, name, 't2.medium')
 
 
   @controller.expose(help='launch a fresh instance in a layer of a stack.')
