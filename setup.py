@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1'
+version = '0.2'
 
 setup(name='owdo',
       version=version,
@@ -14,7 +14,6 @@ setup(name='owdo',
       author_email='bitmonk@icloud.com',
       url='',
       license='AGPL2',
-      package_dir = {'': 'src'},
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=True,
