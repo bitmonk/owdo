@@ -39,3 +39,21 @@ class OWLayer:
     for key in self._layer:
       yield self._layer[key]
 
+class OWInstance:
+  def __init__(self, ow, stack, layer, name):
+    instance_list =  ow.describe_instances(layer_id=layer['LayerId'])['Instances']
+    instances = {}
+    for instance in instance_list:
+      instances[instance['Hostname']] = instance
+
+    self._instance_list = instance_list
+    self._instances = instances
+    self._instance = instances[name]
+
+  def __getitem__(self, key):
+    return self._instance[key]
+
+  def __iter__(self):
+    for key in self._instance:
+      yield self._instance[key]
+
